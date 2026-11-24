@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Happy Bot</title>
+</head>
+
+<body>
+
+    <div class="chat">
+        <h2>😊 Happy Bot</h2>
+
+        <div id="messages"></div>
+
+        <input id="answer"
+            placeholder="Type your answer"
+            onkeydown="if(event.key=='Enter') send()">
+
+        <button onclick="send()">Send</button>
+    </div>
+
+    <script>
+        var questions = [
+            "How do you feel today?",
+            "What made you feel this way?",
+            "What is your favourite activity?",
+            "What would you like to do tomorrow?"
+        ];
+        var count = 0;
+
+        function addMessage(msg, type) {
+            var box = document.createElement("div");
+            box.className = type;
+            box.innerHTML = msg;
+        document.getElementById("messages").appendChild(box);
+        }
+        addMessage(questions[count], "bot");
+
+        function send() {
+            var input = document.getElementById("answer");
+            var reply = input.value.trim();
+
+            if (reply == "") return;
+              addMessage(reply, "user");
+              input.value = "";
+              count++;
+
+            if (count < questions.length) {
+                addMessage(questions[count], "bot");
+            }
+            else {
+                addMessage("Great job! 🎉 You completed all questions!", "bot");
+
+                addMessage(
+                    '<a href="https://youtu.be/BBz7-F9mdUE?si=wcKNQA2nNghuktOK">play it & watch </a>',
+                    "bot"
+                );
+
+               input.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
